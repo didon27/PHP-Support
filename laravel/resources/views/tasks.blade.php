@@ -92,10 +92,10 @@
                     $('#total_records').text(data.length);
                     for (var count = 0; count < data.length; count++) {
                         output += '<tr>';
-                        output += '<td>' + data[count].post_title + '</td>';
+                        output += '<td>' + data[count].title + '</td>';
                         output += '<td>' + data[count].status + '</td>';
                         output += '<td>' + data[count].author + '</td>';
-                        output += '<td>' + data[count].date + '</td></tr>';
+                        output += '<td>' + data[count].created_at + '</td></tr>';
                     }
                     $('tbody').html(output);
                 }

@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
+
+use App\Models\Tasks;
 
 class TasksController extends Controller
 {
+
     function index()
     {
         return view('tasks');
@@ -18,21 +20,18 @@ class TasksController extends Controller
             $array_filters = [];
 
             if ($request->date || $request->status) {
-                
+
                 //Заполнить массив выбранными фильтрами
                 if ($request->status) {
                     array_push($array_filters, ['status', '=', $request->status]);
                 }
 
                 if ($request->date) {
-                    array_push($array_filters, ['date', '=', $request->date]);
+                    array_push($array_filters, ['created_at', '=', $request->date]);
                 }
-
-                $result = DB::table('post')->where($array_filters)->get();;
-
+                $result = Tasks::where($array_filters)->get();;
             } else {
-                $result = DB::table('post')->orderBy('date', 'desc')->get();
-
+                $result = Tasks::orderBy('created_at', 'desc')->get();
             }
 
             echo json_encode($result);
